@@ -41,16 +41,4 @@ function isValid(s){
 
   return stack.length === 0
 }
-
-function isValid(str) {
-  let s = /\(\)/g
-  let m = /\[\]/g
-  let l = /\{\}/g
-
-  str.replace(s, "")
-  str.replace(m, "")
-  str.replace(l, "")
-
-  return str === ""
-}
 // @lc code=end
