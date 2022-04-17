@@ -9,8 +9,17 @@
  * @param {string} s
  * @return {boolean}
  */
-var isValid = function(s) {
+var isValid = function (s) {
+  const reg1 = /\(\)/g
+  const reg2 = /\[\]/g
+  const reg3 = /\{\}/g
 
-};
+  while (s.includes("{}") || s.includes("[]") || s.includes("()")) {
+    s = s.replace(reg1, "")
+    s = s.replace(reg2, "")
+    s = s.replace(reg3, "")
+  }
+
+  return s.length === 0
+}
 // @lc code=end
-
