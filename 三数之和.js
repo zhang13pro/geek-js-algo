@@ -1,20 +1,45 @@
 /**
  * @param {number[]} nums
- * @param {number} target
- * @return {number[]}
+ * @return {number[][]}
  */
-var twoSum = function(nums, target) {
-    let map = new Map()
-    let res = []
-    // forEach 不能 break，函数式本身是 total 的 
-    for (let i = 0; i < nums.length; i++) {
-        let n = nums[i]
-        let c = map.get(target - n)
-        if (c !== undefined) {
-            res.push(c, i)
-        }
-        map.set(n, i)
-    }
+let twoSum = function (nums, target) {
+  let map = new Map()
+  let results = []
 
-    return res
-};
+  for (let i = 0; i < nums.length; i++) {
+    let num = nums[i]
+    let result = map.get(target - num)
+    if (result !== undefined) {
+      results.push([nums[result], num])
+    }
+    map.set(num, i)
+  }
+
+  return results
+}
+
+let threeSum = function (nums) {
+  nums.sort((a, b) => a - b)
+  let set = new Set()
+  let results = []
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    let find = twoSum(nums.slice(i + 1), -nums[i])
+    if (find.length) {
+      find.forEach((arr) => {
+        if (!set.has(arr.join(''))) {
+          results.push([nums[i], ...arr])
+        }
+        set.add(arr.join(''))
+      })
+    }
+  }
+
+  return results
+}
+
+console.log(threeSum([-1, 0, 1, 2, -1, -4]))
+
+/**
+ * 利用两数之和的变形来求解，循环判断第三个数的负数是否能和另外两个数相加得到。
+ */
